@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   image: {
-    width: "60%",
+    width: "75%",
   },
   identifier: {
     position: "absolute",

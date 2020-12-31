@@ -15,18 +15,27 @@ import { useEffect } from "react";
 import { fetchPokemonsByIdOrName } from "../../features/pokemonsList/pokemonListSlice";
 import { PageTitleNavigation } from "../../components/Navigation/PageTitleNavigation";
 import { Capitalize } from "../../Util/Capitalize";
+import { PokemonSpecies } from "../../types/PokemonSpecies";
+import { fetchPokemonSpeciesById } from "../../features/pokemonSpecies/pokemonSpeciesSlice";
 
 export const PokemonPage: React.FC = () => {
   const classes = useStyles();
   const match = useRouteMatch<any>();
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.pokemon);
+  const { speciesData } = useSelector(
+    (state: RootState) => state.pokemonSpecies
+  );
   const selectedPokemon = data.find(
     (p: Pokemon) => p && p.id === Number(match.params.id)
+  );
+  const selectedPokemonSpecies = speciesData.find(
+    (ps: PokemonSpecies) => ps && ps.id === Number(match.params.id)
   );
 
   useEffect(() => {
     fetchPokemonIfUnavailable();
+    fetchPokemonSpeciesIfUnavailable();
   }, []);
 
   const fetchPokemonIfUnavailable = () => {
@@ -35,7 +44,13 @@ export const PokemonPage: React.FC = () => {
     }
   };
 
-  if (selectedPokemon) {
+  const fetchPokemonSpeciesIfUnavailable = () => {
+    if (!selectedPokemonSpecies) {
+      dispatch(fetchPokemonSpeciesById(match.params.id));
+    }
+  };
+
+  if (selectedPokemon && selectedPokemonSpecies) {
     return (
       <Grid container justify="center" alignContent="center">
         <Grid item xs={12} lg={8} className={classes.container}>
@@ -46,7 +61,10 @@ export const PokemonPage: React.FC = () => {
           <Paper className={classes.paper}>
             <Grid container direction="row" className={classes.innerContainer}>
               <PokemonPageImage pokemon={selectedPokemon} />
-              <PokemonPageTabs pokemon={selectedPokemon} />
+              <PokemonPageTabs
+                pokemon={selectedPokemon}
+                species={selectedPokemonSpecies}
+              />
             </Grid>
           </Paper>
           <PokemonPageControls pokemon={selectedPokemon} />

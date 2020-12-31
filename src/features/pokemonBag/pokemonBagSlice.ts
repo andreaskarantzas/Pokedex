@@ -20,8 +20,8 @@ const pokemonBagSlice = createSlice({
   name: "bagList",
   initialState,
   reducers: {
-    addPokemonToBag(state, { payload }: PayloadAction<Pokemon>) {
-      const pokemon = payload;
+    addPokemonToBag(state, action: PayloadAction<{ pokemon: Pokemon }>) {
+      const { pokemon } = action.payload;
       const pokemonExistsInBag = state.data.find(
         (p: Pokemon) => p && p.id === pokemon.id
       );
@@ -30,8 +30,8 @@ const pokemonBagSlice = createSlice({
         AppStore.store("MyPokemonBag", JSON.stringify(state.data));
       }
     },
-    removePokemonFromBag(state, { payload }: PayloadAction<Pokemon>) {
-      const pokemon = payload;
+    removePokemonFromBag(state, action: PayloadAction<{ pokemon: Pokemon }>) {
+      const { pokemon } = action.payload;
       const pokemonBagIndex = state.data.findIndex(
         (p: Pokemon) => p && p.id === pokemon.id
       );

@@ -29,9 +29,9 @@ export const PokemonPageControls: React.FC<PokemonPageControlsProps> = ({
 
   const handleBagPress = useCallback(() => {
     if (pokemonExistsInBag) {
-      dispatch(removePokemonFromBag(pokemon));
+      dispatch(removePokemonFromBag({ pokemon }));
     } else {
-      dispatch(addPokemonToBag(pokemon));
+      dispatch(addPokemonToBag({ pokemon }));
     }
   }, [pokemonExistsInBag, dispatch, pokemon]);
 

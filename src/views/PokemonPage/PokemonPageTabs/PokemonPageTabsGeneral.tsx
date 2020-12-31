@@ -13,12 +13,13 @@ import { Capitalize } from "../../../Util/Capitalize";
 import { PokemonAbility } from "../../../types/PokemonAbility";
 
 export type PokemonPageTabsGeneralProps = {
-  value: number;
+  tabIndex: number;
 } & PokemonPageTabsProps;
 
 export const PokemonPageTabsGeneral: React.FC<PokemonPageTabsGeneralProps> = ({
   pokemon,
-  value,
+  tabIndex,
+  species,
 }: PokemonPageTabsGeneralProps) => {
   const classes = useStyles();
 
@@ -30,60 +31,59 @@ export const PokemonPageTabsGeneral: React.FC<PokemonPageTabsGeneralProps> = ({
     pokemon,
   ]);
 
+  const descriptionText = React.useMemo(() => {
+    return species.flavor_text_entries.find(
+      (text) => text.language.name === "en"
+    )?.flavor_text;
+  }, [species]);
+
   return (
-    <Display enable={value === 0}>
-      <Grid
-        container
-        justify="space-between"
-        alignContent="center"
-        className={classes.root}
-      >
-        <Typography className={classes.label}>Physical</Typography>
+    <Display enable={tabIndex === 0}>
+      <Grid container justify="space-between" alignContent="center">
+        <Display enable={!!descriptionText}>
+          <Typography className={classes.sectionTitle}>Description</Typography>
+          <Typography className={classes.labelText}>
+            {descriptionText}
+          </Typography>
+        </Display>
+        <Typography className={classes.sectionTitle}>Physical</Typography>
         <TableLabel label="Height" value={`${heightInMeters} m`} />
         <TableLabel label="Weight" value={`${weightInKgs} kg`} />
-        <Typography className={classes.label}>Types</Typography>
-        {pokemon.types.map((t: PokemonType, index: number) => (
-          <Grid container key={`${pokemon.id}_${t.type.name}`}>
-            <TableLabel
-              label={`Type ${index + 1}`}
-              value={Capitalize(t.type.name)}
-            />
-          </Grid>
-        ))}
-        <Typography className={classes.label}>Abilities</Typography>
-        {pokemon.abilities.map((a: PokemonAbility, index: number) => (
-          <Grid container key={`${pokemon.id}_${a.ability.name}`}>
-            <TableLabel
-              label={`Ability ${index + 1}`}
-              value={Capitalize(a.ability.name)}
-            />
-          </Grid>
-        ))}
+        <Typography className={classes.sectionTitle}>Types</Typography>
+        <Grid container direction="row" spacing={1}>
+          {pokemon.types.map((t: PokemonType, index: number) => (
+            <Grid item key={`${pokemon.id}_${t.type.name}`}>
+              <Typography className={classes.labelText}>
+                {Capitalize(t.type.name)}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
+        <Typography className={classes.sectionTitle}>Abilities</Typography>
+        <Grid container direction="row" spacing={1}>
+          {pokemon.abilities.map((a: PokemonAbility) => (
+            <Grid item key={`${pokemon.id}_${a.ability.name}`}>
+              <Typography className={classes.labelText}>
+                {`${Capitalize(a.ability.name)}`}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
     </Display>
   );
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    paddingTop: theme.spacing(4),
-  },
-  title: {
-    color: ThemeConfig.Colors.black,
-    fontWeight: "bold",
-  },
-  text: {
-    color: ThemeConfig.Colors.warmestGrey,
-    fontWeight: "normal",
-  },
-  pokemonTypeContainer: {
-    padding: "8px 16px",
-  },
-  label: {
+  sectionTitle: {
     color: ThemeConfig.Colors.black,
     fontWeight: "bold",
     fontSize: 22,
-    paddingLeft: theme.spacing(4),
-    paddingBottom: theme.spacing(1),
+    paddingTop: 8,
+  },
+  labelText: {
+    paddingRight: theme.spacing(1),
+    color: ThemeConfig.Colors.charcoalGrey,
+    fontWeight: "normal",
   },
 }));

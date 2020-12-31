@@ -36,9 +36,10 @@ const autocompleteSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    setAutocompleteDataFailure(state, { payload }: PayloadAction<string>) {
+    setAutocompleteDataFailure(state, action: PayloadAction<{ err: string }>) {
+      const { err } = action.payload;
       state.loading = false;
-      state.error = payload;
+      state.error = err;
     },
     // todo: fix any
     getAutocompleteDataReducer(
@@ -85,6 +86,6 @@ export const fetchPokemonsForAutocomplete = (): AppThunk => async (
       dispatch(getAutocompleteDataReducer(res.results));
     }
   } catch (err) {
-    dispatch(setAutocompleteDataFailure(err));
+    dispatch(setAutocompleteDataFailure({ err }));
   }
 };

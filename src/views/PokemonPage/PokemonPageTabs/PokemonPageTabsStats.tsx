@@ -2,58 +2,29 @@
  * Created by andreaskarantzas on 27.12.20.
  */
 import * as React from "react";
-import { LinearProgress, withStyles } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { PokemonPageTabsProps } from "./PokemonPageTabs";
 import { PokemonStat } from "../../../types/PokemonStat";
 import { Display } from "../../../components/Display/Display";
-import { TableLabel } from "../../../components/Labels/TableLabel";
-import { Capitalize } from "../../../Util/Capitalize";
+import { PokemonPageTabsStatItem } from "./PokemonPageTabsStatItem";
+import { Typography } from "@material-ui/core";
 
 export type PokemonPageTabsStatsProps = {
-  value: number;
+  tabIndex: number;
 } & PokemonPageTabsProps;
-
-const BorderLinearProgress = withStyles((theme) => ({
-  root: {
-    height: 10,
-    borderRadius: 5,
-  },
-  colorPrimary: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.type === "light" ? 200 : 700],
-  },
-  bar: {
-    borderRadius: 5,
-    backgroundColor: "darkslategrey",
-  },
-}))(LinearProgress);
 
 export const PokemonPageTabsStats: React.FC<PokemonPageTabsStatsProps> = ({
   pokemon,
-  value,
+  tabIndex,
 }: PokemonPageTabsStatsProps) => {
-  const classes = useStyles();
-
   return (
-    <Display enable={value === 1}>
+    <Display enable={tabIndex === 1}>
       {pokemon.stats.map((s: PokemonStat) => (
-        <div key={s.stat.name}>
-          <TableLabel
-            label={Capitalize(s.stat.name)}
-            value={`${s.base_stat}`}
-          />
-          <div className={classes.barContainer}>
-            <BorderLinearProgress variant="determinate" value={s.base_stat} />
-          </div>
-        </div>
+        <PokemonPageTabsStatItem key={s.stat.name} stat={s} />
       ))}
+      <Typography variant="caption">
+        Learn more on how the stat values are calculated{" "}
+        <a href="https://www.smogon.com/dp/articles/normalized_stats">here</a>.
+      </Typography>
     </Display>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  barContainer: {
-    padding: "0px 16px 8px 16px",
-  },
-}));

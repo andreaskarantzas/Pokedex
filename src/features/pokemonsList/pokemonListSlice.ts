@@ -30,20 +30,21 @@ const pokemonsListSlice = createSlice({
       state.loading = true;
       state.error = null;
     },
-    setPokemonsListSuccess(state, { payload }: PayloadAction<boolean>) {
-      const hasMore = payload;
+    setPokemonsListSuccess(state, action: PayloadAction<{ hasMore: boolean }>) {
+      const { hasMore } = action.payload;
       state.loading = false;
       state.error = null;
       if (hasMore) {
         state.offset += 20;
       }
     },
-    setPokemonsListFailure(state, { payload }: PayloadAction<string>) {
+    setPokemonsListFailure(state, action: PayloadAction<{ err: string }>) {
+      const { err } = action.payload;
       state.loading = false;
-      state.error = payload;
+      state.error = err;
     },
-    getPokemonsReducer(state, { payload }: PayloadAction<Pokemon>) {
-      const pokemon = payload;
+    getPokemonsReducer(state, action: PayloadAction<{ pokemon: Pokemon }>) {
+      const { pokemon } = action.payload;
       const pokemonExists = state.data.find(
         (p: Pokemon) => p && p.id === pokemon.id
       );
@@ -68,7 +69,6 @@ export const fetchPokemons = (): AppThunk => async (dispatch, getState) => {
   const { pokemon } = getState();
   try {
     dispatch(preparePokemonsList());
-    // @ts-ignore
     const res: Pageable = await pokeApiGet("pokemon", {
       limit: 9,
       offset: pokemon.offset,
@@ -76,10 +76,10 @@ export const fetchPokemons = (): AppThunk => async (dispatch, getState) => {
     for await (const [index, { url }] of res.results.entries()) {
       const pokemonId = Number(url.split("/").slice(-2)[0]);
       const pokemon = await pokeApiGet(`pokemon/${pokemonId}`);
-      dispatch(getPokemonsReducer(pokemon));
+      dispatch(getPokemonsReducer({ pokemon }));
       //}
     }
-    dispatch(setPokemonsListSuccess(!!res.next));
+    dispatch(setPokemonsListSuccess({ hasMore: !!res.next }));
   } catch (err) {
     dispatch(setPokemonsListFailure(err));
   }
@@ -91,11 +91,10 @@ export const fetchPokemonsByIdOrName = (query: string): AppThunk => async (
   try {
     dispatch(resetPokemonsList());
     dispatch(preparePokemonsList());
-    // @ts-ignore
     const pokemon = await pokeApiGet(`pokemon/${query}`);
-    dispatch(getPokemonsReducer(pokemon));
-    dispatch(setPokemonsListSuccess(false));
+    dispatch(getPokemonsReducer({ pokemon }));
+    dispatch(setPokemonsListSuccess({ hasMore: false }));
   } catch (err) {
-    dispatch(setPokemonsListFailure(err));
+    dispatch(setPokemonsListFailure({ err }));
   }
 };

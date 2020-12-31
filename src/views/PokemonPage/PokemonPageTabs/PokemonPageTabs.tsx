@@ -7,26 +7,29 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Pokemon } from "../../../types/Pokemon";
 import { PokemonPageTabsGeneral } from "./PokemonPageTabsGeneral";
 import { PokemonPageTabsStats } from "./PokemonPageTabsStats";
+import { PokemonSpecies } from "../../../types/PokemonSpecies";
 
 export type PokemonPageTabsProps = {
   pokemon: Pokemon;
+  species: PokemonSpecies;
 };
 
 export const PokemonPageTabs: React.FC<PokemonPageTabsProps> = ({
   pokemon,
+  species,
 }: PokemonPageTabsProps) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [tabIndex, setTabIndex] = React.useState(0);
 
-  const handleChange = (event: any, newValue: number) => {
-    setValue(newValue);
+  const handleTabChange = (event: any, newValue: number) => {
+    setTabIndex(newValue);
   };
 
   return (
     <Grid item xs={12} sm={6} className={classes.container}>
       <Tabs
-        value={value}
-        onChange={handleChange}
+        value={tabIndex}
+        onChange={handleTabChange}
         indicatorColor="primary"
         textColor="primary"
         centered
@@ -34,15 +37,23 @@ export const PokemonPageTabs: React.FC<PokemonPageTabsProps> = ({
         <Tab label="General" className={classes.tabLabel} />
         <Tab label="Stats" className={classes.tabLabel} />
       </Tabs>
-      <PokemonPageTabsGeneral pokemon={pokemon} value={value} />
-      <PokemonPageTabsStats pokemon={pokemon} value={value} />
+      <PokemonPageTabsGeneral
+        pokemon={pokemon}
+        tabIndex={tabIndex}
+        species={species}
+      />
+      <PokemonPageTabsStats
+        pokemon={pokemon}
+        tabIndex={tabIndex}
+        species={species}
+      />
     </Grid>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(3),
   },
   tabLabel: {
     fontWeight: "bold",

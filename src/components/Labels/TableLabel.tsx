@@ -8,7 +8,7 @@ import ThemeConfig from "../../Theme";
 
 export type TableLabelProps = {
   label: string;
-  value: string;
+  value?: string;
 };
 
 export const TableLabel: React.FC<TableLabelProps> = ({
@@ -18,28 +18,20 @@ export const TableLabel: React.FC<TableLabelProps> = ({
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      justify="space-between"
-      alignContent="center"
-      className={classes.container}
-    >
+    <Grid container justify="space-between" alignContent="center">
       <Typography className={classes.label}>{label}</Typography>
-      <Typography className={classes.value}>{value}</Typography>
+      <Typography className={classes.value}>{value || ""}</Typography>
     </Grid>
   );
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    padding: "0px 16px 8px 16px",
-  },
   label: {
-    color: ThemeConfig.Colors.warmestGrey,
-    fontWeight: "bold",
-  },
-  value: {
     color: ThemeConfig.Colors.charcoalGrey,
     fontWeight: "normal",
+  },
+  value: {
+    color: ThemeConfig.Colors.secondaryColor,
+    fontWeight: "bold",
   },
 }));
