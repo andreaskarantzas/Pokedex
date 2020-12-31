@@ -3,7 +3,7 @@
  */
 const pokemonNameThatDoesNotExist = "qwerty";
 
-context("PokemonPage", () => {
+context("PokemonList", () => {
   before(() => {
     cy.visit("/");
   });
@@ -31,7 +31,7 @@ context("PokemonPage", () => {
     cy.get("#search_error_text").contains(pokemonNameThatDoesNotExist);
   });
 
-  it("navigate successfully to bagPage", function () {
+  it("navigate successfully to bagPage", () => {
     // wait for the data to be loaded
     cy.wait(3000);
     // bag fab button should be visible

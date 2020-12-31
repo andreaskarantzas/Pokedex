@@ -43,6 +43,7 @@ export const PokemonPageControls: React.FC<PokemonPageControlsProps> = ({
       alignContent="center"
     >
       <Button
+        id={pokemonExistsInBag ? "added_in_bag" : "not_added_in_bag"}
         color={pokemonExistsInBag ? "secondary" : "primary"}
         onClick={handleBagPress}
       >

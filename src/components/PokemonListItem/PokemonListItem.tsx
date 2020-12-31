@@ -48,6 +48,7 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
     >
       <Grid
         key={pokemon.id}
+        id={pokemon.name}
         item
         className={classes.container}
         style={{

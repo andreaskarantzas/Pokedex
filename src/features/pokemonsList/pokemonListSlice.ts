@@ -35,7 +35,7 @@ const pokemonsListSlice = createSlice({
       state.loading = false;
       state.error = null;
       if (hasMore) {
-        state.offset += 12;
+        state.offset += 9;
       }
     },
     setPokemonsListFailure(state, action: PayloadAction<{ err: string }>) {
@@ -70,7 +70,7 @@ export const fetchPokemons = (): AppThunk => async (dispatch, getState) => {
   try {
     dispatch(preparePokemonsList());
     const res: Pageable = await pokeApiGet("pokemon", {
-      limit: 12,
+      limit: 9,
       offset: pokemon.offset,
     });
     for await (const [index, { url }] of res.results.entries()) {
