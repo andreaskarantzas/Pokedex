@@ -1,6 +1,5 @@
 {
   "name": "pokedex-redux",
-  "homepage": "https://andreaskarantzas.github.io/pokedex",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -89,9 +88,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
-    "clean" : "gh-pages-clean"
+    "deploy": "netlify deploy"
   },
   "eslintConfig": {
     "extends": [
@@ -173,7 +170,6 @@
     "@types/react-redux": "^7.1.14",
     "@types/react-router-dom": "^5.1.6",
     "prettier": "2.2.1",
-    "redux-devtools": "^3.7.0",
-    "gh-pages": "^3.1.0"
+    "redux-devtools": "^3.7.0"
   }
 }
