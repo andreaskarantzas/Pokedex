@@ -4,9 +4,7 @@
 import * as React from "react";
 import { Grid, LinearProgress, withStyles } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { PokemonPageTabsProps } from "./PokemonPageTabs";
 import { PokemonStat } from "../../../types/PokemonStat";
-import { Display } from "../../../components/Display/Display";
 import { TableLabel } from "../../../components/Labels/TableLabel";
 import { Capitalize } from "../../../Util/Capitalize";
 
@@ -42,7 +40,7 @@ export const PokemonPageTabsStatItem: React.FC<PokemonPageTabsStatItemProps> = (
   /** resource for the following calculations:
    * https://www.smogon.com/dp/articles/normalized_stats
    * **/
-  const getMinMax = React.useMemo(() => {
+  const getMinMax = React.useMemo((): NormalizedStat => {
     if (stat.stat.name === "hp") {
       const min = 2 * stat.base_stat + 141;
       const max = 2 * stat.base_stat + 204;

@@ -67,6 +67,6 @@ export const fetchPokemonSpeciesById = (id: string): AppThunk => async (
     dispatch(getPokemonSpeciesReducer({ species: pokemonSpecies }));
     dispatch(setPokemonSpeciesSuccess());
   } catch (err) {
-    dispatch(setPokemonSpeciesFailure({ err }));
+    dispatch(setPokemonSpeciesFailure({ err: JSON.stringify(err) }));
   }
 };

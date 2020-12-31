@@ -34,13 +34,16 @@ export const PageTitleNavigation: React.FC<PageTitleNavigationProps> = ({
             color="secondary"
             onClick={handleBack}
             className={classes.iconContainer}
+            id="back_arrow_icon"
           >
             <ArrowBack className={classes.backIcon} />
           </IconButton>
         </Display>
       </Grid>
       <Grid item>
-        <Typography className={classes.title}>{title}</Typography>
+        <Typography className={classes.title} id="page_title_navigation">
+          {title}
+        </Typography>
       </Grid>
     </Grid>
   );

@@ -24,6 +24,7 @@ export const SearchError: React.FC<SearchErrorProps> = ({
       className={classes.container}
     >
       <Typography
+        id="search_error_text"
         className={classes.label}
       >{`No Pokémons found for: ${query}`}</Typography>
     </Grid>

@@ -95,6 +95,6 @@ export const fetchPokemonsByIdOrName = (query: string): AppThunk => async (
     dispatch(getPokemonsReducer({ pokemon }));
     dispatch(setPokemonsListSuccess({ hasMore: false }));
   } catch (err) {
-    dispatch(setPokemonsListFailure({ err }));
+    dispatch(setPokemonsListFailure({ err: JSON.stringify(err) }));
   }
 };

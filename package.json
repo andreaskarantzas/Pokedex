@@ -89,8 +89,9 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "test-build": "yarn test && yarn build",
-    "deploy-staging": "yarn test-build && netlify deploy",
-    "deploy-prod": "yarn test-build && netlify deploy --prod"
+    "cypress:open": "cypress open",
+    "deploy:staging": "yarn test-build && netlify deploy",
+    "deploy:prod": "yarn test-build && netlify deploy --prod"
   },
   "eslintConfig": {
     "extends": [
@@ -169,6 +170,8 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.12.1",
+    "@bahmutov/add-typescript-to-cypress": "^2.1.2",
+    "cypress": "^5.1.0",
     "@types/react-redux": "^7.1.14",
     "@types/react-router-dom": "^5.1.6",
     "prettier": "2.2.1",

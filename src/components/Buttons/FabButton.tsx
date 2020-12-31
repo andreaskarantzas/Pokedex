@@ -24,6 +24,7 @@ export const FabButton: React.FC = () => {
   if (displayFab) {
     return (
       <Fab
+        id="fab_bag"
         onClick={handleMyBagPress}
         className={classes.container}
         size="large"

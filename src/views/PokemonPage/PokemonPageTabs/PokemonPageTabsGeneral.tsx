@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: "bold",
     fontSize: 16,
     [theme.breakpoints.up("md")]: {
-      fontSize: 20,
+      fontSize: 18,
     },
     paddingTop: 8,
   },

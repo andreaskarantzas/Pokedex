@@ -1,5 +1,5 @@
 /**
- * Created by andreaskarantzas on 29.20.20
+ * Created by andreaskarantzas on 29.12.20
  */
 
 import React, { useCallback, useEffect, useRef } from "react";
@@ -55,6 +55,7 @@ export const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
       <Autocomplete
         id="autocomplete-box"
         freeSolo
+        disableClearable={true}
         fullWidth={true}
         options={props.autocompleteData || []}
         getOptionLabel={(option) =>

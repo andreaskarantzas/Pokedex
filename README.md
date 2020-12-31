@@ -63,20 +63,27 @@ You will also see any lint errors in the console.
    Note: The publish directory should be ./build
    
 ```sh
-yarn deploy-staging
+yarn deploy:staging
 ```
 
 2. Deploy app to production with Netlify CLI (runs the included tests first)
    Note: The publish directory should be ./build
 
 ```sh
-yarn deploy-prod
+yarn deploy:prod
 ```
 
-3. Runs the included tests
+3. Runs the included jest tests
 
 ```sh
 yarn test
+```
+
+4. Runs the cypress testing suite
+
+
+```sh
+yarn cypress:open
 ```
 
 ## Built from these awesome projects

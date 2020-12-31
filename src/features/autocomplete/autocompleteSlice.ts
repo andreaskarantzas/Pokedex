@@ -84,6 +84,6 @@ export const fetchPokemonsForAutocomplete = (): AppThunk => async (
       dispatch(getAutocompleteDataReducer(res.results));
     }
   } catch (err) {
-    dispatch(setAutocompleteDataFailure({ err }));
+    dispatch(setAutocompleteDataFailure({ err: JSON.stringify(err) }));
   }
 };
