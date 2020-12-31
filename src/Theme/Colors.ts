@@ -60,9 +60,13 @@ for (const colorKey of colorKeys) {
   enhanceColor(Colors, colorKey);
 }
 
+/**
+ * returns the color hex value when a key is specified
+ * @param key
+ */
 export const getColorValueByKey = (key: string) => {
   if (Colors.hasOwnProperty(key)) {
     return Colors[key];
   }
-  throw new Error("Color not found");
+  return Colors["transparent"];
 };

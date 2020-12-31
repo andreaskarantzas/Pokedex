@@ -14,6 +14,7 @@
 - [The Problem](#the-problem)
 - [The Solution](#this-solution)
 - [Getting started](#getting-started)
+- [Additional scripts](#additional-scripts)
 - [Built With](#built-from-these-awesome-projects)
 - [Attribution](#attribution)
 
@@ -56,13 +57,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-4. (Optional) Deploy app with Netlify CLI
+## Additional scripts
 
+1. Deploy app to staging environment with Netlify CLI (runs the included tests first)
+   Note: The publish directory should be ./build
+   
 ```sh
-yarn deploy
+yarn deploy-staging
 ```
 
-Note: The publish directory should be ./build
+2. Deploy app to production with Netlify CLI (runs the included tests first)
+   Note: The publish directory should be ./build
+
+```sh
+yarn deploy-prod
+```
+
+3. Runs the included tests
+
+```sh
+yarn test
+```
 
 ## Built from these awesome projects
 

@@ -28,7 +28,7 @@ export const Navigation: React.FC<NavigationProps> = (_: NavigationProps) => {
   }, []);
 
   return (
-    <>
+    <div>
       {loadingAutocompleteData ? (
         <CircularLoadingView />
       ) : (
@@ -47,6 +47,6 @@ export const Navigation: React.FC<NavigationProps> = (_: NavigationProps) => {
           </React.Suspense>
         </BrowserRouter>
       )}
-    </>
+    </div>
   );
 };
