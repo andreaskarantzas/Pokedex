@@ -4,64 +4,18 @@
   <br>
 </h1>
 <p align="center" style="font-size: 1.2rem;">Pokédex web app built with React, Redux Toolkit, Material UI and PokeAPI</p>
+<p align="center">
 <a href="https://andreaskarantzas-pokedex.netlify.app/">Project website</a>
+</p>
 <hr />
 
 ## Table of Contents
 
 - [The Problem](#the-problem)
-- [The Solution](#getting-started)
+- [The Solution](#this-solution)
 - [Getting started](#getting-started)
 - [Built With](#built-from-these-awesome-projects)
 - [Attribution](#attribution)
-
-
-<!-- GETTING STARTED -->
-
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
-
-```sh
-npm install npm@latest -g
-```
-
-### Installation
-
-1. Clone the repo
-
-```sh
-git clone https://github.com/ShinteiMai/react-pokedex.git
-```
-
-2. Install NPM packages
-
-```sh
-yarn
-```
-
-3. Run the local development server
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/locations`)
-3. Commit your Changes (`git commit -m 'Added pokemon location appearences'`)
-4. Push to the Branch (`git push origin feature/locations`)
-5. Open a Pull Request
-
-<!-- LICENSE -->
-
 
 ## The problem
 

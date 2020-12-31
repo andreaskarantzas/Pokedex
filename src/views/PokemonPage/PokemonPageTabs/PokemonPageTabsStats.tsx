@@ -6,7 +6,8 @@ import { PokemonPageTabsProps } from "./PokemonPageTabs";
 import { PokemonStat } from "../../../types/PokemonStat";
 import { Display } from "../../../components/Display/Display";
 import { PokemonPageTabsStatItem } from "./PokemonPageTabsStatItem";
-import { Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 export type PokemonPageTabsStatsProps = {
   tabIndex: number;
@@ -16,15 +17,32 @@ export const PokemonPageTabsStats: React.FC<PokemonPageTabsStatsProps> = ({
   pokemon,
   tabIndex,
 }: PokemonPageTabsStatsProps) => {
+  const classes = useStyles();
+
   return (
-    <Display enable={tabIndex === 1}>
-      {pokemon.stats.map((s: PokemonStat) => (
-        <PokemonPageTabsStatItem key={s.stat.name} stat={s} />
-      ))}
-      <Typography variant="caption">
-        Learn more on how the stat values are calculated{" "}
-        <a href="https://www.smogon.com/dp/articles/normalized_stats">here</a>.
-      </Typography>
-    </Display>
+    <Grid container className={classes.container}>
+      <Display enable={tabIndex === 1}>
+        {pokemon.stats.map((s: PokemonStat) => (
+          <PokemonPageTabsStatItem key={s.stat.name} stat={s} />
+        ))}
+        <Typography variant="caption">
+          Learn more on how the stat values are calculated{" "}
+          <a
+            href="https://www.smogon.com/dp/articles/normalized_stats"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>
+          .
+        </Typography>
+      </Display>
+    </Grid>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    paddingTop: theme.spacing(1),
+  },
+}));

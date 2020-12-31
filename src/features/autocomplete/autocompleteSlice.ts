@@ -41,7 +41,6 @@ const autocompleteSlice = createSlice({
       state.loading = false;
       state.error = err;
     },
-    // todo: fix any
     getAutocompleteDataReducer(
       state,
       { payload }: PayloadAction<Array<NamedAPIResource>>
@@ -49,7 +48,7 @@ const autocompleteSlice = createSlice({
       const results = payload;
       if (results) {
         Array.from(results.entries()).map((e: [number, NamedAPIResource]) => {
-          const [index, { url, name }]: any = e;
+          const [index, { url, name }] = e;
           return state.autocompleteData.push({ url, name: Capitalize(name) });
         });
         AppStore.store(
@@ -78,7 +77,6 @@ export const fetchPokemonsForAutocomplete = (): AppThunk => async (
   try {
     if (autocomplete.autocompleteData.length === 0) {
       dispatch(prepareAutocompleteData());
-      // @ts-ignore
       const res: Pageable = await pokeApiGet("pokemon", {
         limit: 1200,
       });

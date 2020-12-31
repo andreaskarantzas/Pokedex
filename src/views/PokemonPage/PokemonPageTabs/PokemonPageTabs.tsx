@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   tabLabel: {
+    flexGrow: 1,
     fontWeight: "bold",
   },
 }));
