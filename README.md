@@ -59,8 +59,10 @@ You will also see any lint errors in the console.
 4. (Optional) Deploy app with Netlify CLI
 
 ```sh
-yarn build && yarn deploy
+yarn deploy
 ```
+
+Note: The publish directory should be ./build
 
 ## Built from these awesome projects
 

@@ -2,7 +2,7 @@
  * Created by andreaskarantzas on 27.12.20.
  */
 import * as React from "react";
-import { LinearProgress, withStyles } from "@material-ui/core";
+import { Grid, LinearProgress, withStyles } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PokemonPageTabsProps } from "./PokemonPageTabs";
 import { PokemonStat } from "../../../types/PokemonStat";
@@ -68,15 +68,15 @@ export const PokemonPageTabsStatItem: React.FC<PokemonPageTabsStatItemProps> = (
   }, [stat, getMinMax]);
 
   return (
-    <div key={stat.stat.name}>
+    <Grid container key={stat.stat.name}>
       <TableLabel label={labelText} />
-      <div className={classes.barContainer}>
+      <Grid item xs={12} className={classes.barContainer}>
         <BorderLinearProgress
           variant="determinate"
           value={getNormalisedValue}
         />
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

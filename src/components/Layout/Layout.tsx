@@ -49,6 +49,7 @@ const styles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     overflow: "hidden",
+    paddingBottom: theme.spacing(2),
   },
   appBarSpacer: theme.mixins.toolbar,
 }));

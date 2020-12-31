@@ -88,7 +88,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "deploy": "netlify deploy"
+    "deploy": "yarn build && netlify deploy",
+    "deploy-prod": "yarn build && netlify deploy --prod"
   },
   "eslintConfig": {
     "extends": [

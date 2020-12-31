@@ -62,7 +62,9 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   image: {
+    objectFit: "contain",
     width: "75%",
+    maxHeight: window.innerHeight * 0.33,
   },
   identifier: {
     position: "absolute",

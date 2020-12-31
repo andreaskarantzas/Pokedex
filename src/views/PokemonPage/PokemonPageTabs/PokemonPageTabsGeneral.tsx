@@ -78,7 +78,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   sectionTitle: {
     color: ThemeConfig.Colors.black,
     fontWeight: "bold",
-    fontSize: 22,
+    fontSize: 16,
+    [theme.breakpoints.up("md")]: {
+      fontSize: 20,
+    },
     paddingTop: 8,
   },
   labelText: {

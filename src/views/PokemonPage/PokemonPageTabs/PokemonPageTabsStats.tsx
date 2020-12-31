@@ -21,22 +21,24 @@ export const PokemonPageTabsStats: React.FC<PokemonPageTabsStatsProps> = ({
 
   return (
     <Grid container className={classes.container}>
-      <Display enable={tabIndex === 1}>
-        {pokemon.stats.map((s: PokemonStat) => (
-          <PokemonPageTabsStatItem key={s.stat.name} stat={s} />
-        ))}
-        <Typography variant="caption">
-          Learn more on how the stat values are calculated{" "}
-          <a
-            href="https://www.smogon.com/dp/articles/normalized_stats"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>
-          .
-        </Typography>
-      </Display>
+      <Grid xs={12}>
+        <Display enable={tabIndex === 1}>
+          {pokemon.stats.map((s: PokemonStat) => (
+            <PokemonPageTabsStatItem key={s.stat.name} stat={s} />
+          ))}
+          <Typography variant="caption" className={classes.explanationText}>
+            Learn more on how the stat values are calculated{" "}
+            <a
+              href="https://www.smogon.com/dp/articles/normalized_stats"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            </a>
+            .
+          </Typography>
+        </Display>
+      </Grid>
     </Grid>
   );
 };
@@ -44,5 +46,8 @@ export const PokemonPageTabsStats: React.FC<PokemonPageTabsStatsProps> = ({
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(1),
+  },
+  explanationText: {
+    marginTop: theme.spacing(2),
   },
 }));
