@@ -1,46 +1,123 @@
-# Getting Started with Create React App
+<h1 align="center">
+  <br>
+  <img src="https://andreaskarantzas-pokedex.netlify.app/static/media/backpack.145da451.png" alt="app logo" title="app logo" width="300">
+  <br>
+</h1>
+<p align="center" style="font-size: 1.2rem;">Pokédex web app built with React, Redux Toolkit, Material UI and PokeAPI</p>
+<a href="https://andreaskarantzas-pokedex.netlify.app/">Project website</a>
+<hr />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [The Problem](#the-problem)
+- [The Solution](#getting-started)
+- [Getting started](#getting-started)
+- [Built With](#built-from-these-awesome-projects)
+- [Attribution](#attribution)
 
-In the project directory, you can run:
 
-### `yarn start`
+<!-- GETTING STARTED -->
 
-Runs the app in the development mode.\
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+- npm
+
+```sh
+npm install npm@latest -g
+```
+
+### Installation
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/ShinteiMai/react-pokedex.git
+```
+
+2. Install NPM packages
+
+```sh
+yarn
+```
+
+3. Run the local development server
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/locations`)
+3. Commit your Changes (`git commit -m 'Added pokemon location appearences'`)
+4. Push to the Branch (`git push origin feature/locations`)
+5. Open a Pull Request
+
+<!-- LICENSE -->
+
+
+## The problem
+
+You wanted to have a way to check all the available Pokémons in order to be well-prepared for your quest
+to catch them all.
+
+## This solution
+
+The web app has the following features:
+- Pokédex directory where the user can search for a Pokémon with name or id. The search field provides
+  also an autocomplete functionality.
+- See detailed information for any Pokémon like description, abilities, stats etc.
+- Save your favorite Pokémons in your bag to have them always with you.
+
+
+## Getting Started
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/andreaskarantzas/pokedex.git
+```
+
+2. Install the necessary packages
+
+```sh
+yarn install
+```
+
+3. Start the app in development mode
+
+```sh
+yarn start
+```
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+4. (Optional) Deploy app with Netlify CLI
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+yarn build && yarn deploy
+```
 
-### `yarn build`
+## Built from these awesome projects
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [React](https://reactjs.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [PokéAPI](https://pokeapi.co/)
+- [MaterialUI](https://material-ui.com/)
+- [Apisauce](https://github.com/infinitered/apisauce)
+- [Prettier](https://prettier.io/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Attribution
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/)
