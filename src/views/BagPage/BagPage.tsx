@@ -31,13 +31,17 @@ export const BagPage: React.FC = () => {
     setQuery(query);
   }, []);
 
-  const filteredData = (): Array<Pokemon> => {
+  const filteredData = React.useCallback((): Array<Pokemon> => {
     return bagData.filter((p: Pokemon) =>
       String(p.name || p.id)
         .toLowerCase()
         .includes(query.toLowerCase())
     );
-  };
+  }, [bagData, query]);
+
+  const showError = React.useCallback(() => {
+    return query !== "" && filteredData().length === 0;
+  }, [filteredData, query]);
 
   return (
     <Grid container justify="center" alignContent="center">
@@ -46,8 +50,9 @@ export const BagPage: React.FC = () => {
         <Grid container justify="flex-start" alignContent="center">
           <SearchBar
             onValueChange={handleQueryChange}
-            value={query}
+            query={query}
             label="Search in your bag"
+            error={showError()}
           />
         </Grid>
         <Grid
@@ -69,10 +74,10 @@ export const BagPage: React.FC = () => {
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(2),
   },
   listContainer: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(2),
     flexGrow: 1,
   },
 }));

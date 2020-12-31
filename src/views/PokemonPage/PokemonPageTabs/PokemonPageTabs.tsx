@@ -53,7 +53,10 @@ export const PokemonPageTabs: React.FC<PokemonPageTabsProps> = ({
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
+      padding: theme.spacing(3),
+    },
   },
   tabLabel: {
     fontWeight: "bold",

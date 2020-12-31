@@ -28,33 +28,46 @@ export const PageTitleNavigation: React.FC<PageTitleNavigationProps> = ({
 
   return (
     <Grid container alignContent="center" direction="row" justify="flex-start">
-      <Display enable={canGoBack}>
-        <IconButton
-          color="secondary"
-          onClick={handleBack}
-          className={classes.iconContainer}
-        >
-          <ArrowBack className={classes.backIcon} />
-        </IconButton>
-      </Display>
-      <Typography variant="h2" className={classes.title}>
-        {title}
-      </Typography>
+      <Grid item>
+        <Display enable={canGoBack}>
+          <IconButton
+            color="secondary"
+            onClick={handleBack}
+            className={classes.iconContainer}
+          >
+            <ArrowBack className={classes.backIcon} />
+          </IconButton>
+        </Display>
+      </Grid>
+      <Grid item>
+        <Typography className={classes.title}>{title}</Typography>
+      </Grid>
     </Grid>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
   title: {
+    fontSize: 32,
+    [theme.breakpoints.up("md")]: {
+      fontSize: 40,
+    },
     color: ThemeConfig.Colors.charcoalGrey,
     fontWeight: 900,
     fontStyle: "italic",
     fontFamily: "Montserrat",
   },
   iconContainer: {
-    marginRight: theme.spacing(2),
+    marginTop: 2,
+    [theme.breakpoints.up("md")]: {
+      marginTop: 4,
+    },
+    marginRight: theme.spacing(1),
   },
   backIcon: {
-    fontSize: 48,
+    fontSize: 24,
+    [theme.breakpoints.up("md")]: {
+      fontSize: 32,
+    },
   },
 }));

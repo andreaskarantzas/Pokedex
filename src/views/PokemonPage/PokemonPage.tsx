@@ -77,14 +77,17 @@ export const PokemonPage: React.FC = () => {
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: "16px 32px",
+    padding: theme.spacing(2),
   },
   paper: {
-    borderRadius: theme.spacing(4),
+    borderRadius: theme.spacing(2),
     width: "100%",
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(1),
   },
   innerContainer: {
-    padding: theme.spacing(4),
+    padding: theme.spacing(1),
+    [theme.breakpoints.up("md")]: {
+      padding: theme.spacing(2),
+    },
   },
 }));

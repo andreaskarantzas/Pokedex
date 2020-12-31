@@ -30,7 +30,7 @@ export const LayoutAppBar: React.FC = () => {
         </Grid>
         <Grid item>
           <Link
-            href="https://github.com/"
+            href="https://github.com/andreaskarantzas/pokedex"
             target="_blank"
             rel="noopener noreferrer"
           >

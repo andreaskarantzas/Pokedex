@@ -32,32 +32,38 @@ export const MainPage: React.FC = () => {
     data.length <= 1 && dispatch(fetchPokemons());
   }, []);
 
-  const handleQueryChange = React.useCallback((query: string) => {
-    setQuery(query.toLowerCase());
-    if (query !== "") {
-      dispatch(fetchPokemonsByIdOrName(query.toLowerCase()));
-    } else {
-      dispatch(fetchPokemons());
-    }
-  }, []);
+  const handleQueryChange = React.useCallback(
+    (query: string) => {
+      setQuery(query.toLowerCase());
+      if (query !== "") {
+        dispatch(fetchPokemonsByIdOrName(query.toLowerCase()));
+      } else {
+        dispatch(fetchPokemons());
+      }
+    },
+    [dispatch]
+  );
 
   const handleLoadMore = React.useCallback(() => {
     dispatch(fetchPokemons());
-  }, []);
+  }, [dispatch]);
+
+  const showError = React.useCallback(() => {
+    return query !== "" && data.length === 0 && !loading;
+  }, [data, query, loading]);
 
   return (
     <Grid container justify="center" alignContent="center">
       <Grid item xs={12} lg={8} className={classes.container}>
         <PageTitleNavigation title="Pokédex" />
-        <Grid container justify="space-between" alignContent="center">
-          <SearchBar
-            onValueChange={handleQueryChange}
-            value={query}
-            label="Search for a Pokémon"
-            autocompleteData={autocompleteData}
-            autocompleteIdentifier="name"
-          />
-        </Grid>
+        <SearchBar
+          onValueChange={handleQueryChange}
+          query={query}
+          label="Search for a Pokémon"
+          autocompleteData={autocompleteData}
+          autocompleteIdentifier="name"
+          error={showError()}
+        />
         <Grid
           container
           direction="row"

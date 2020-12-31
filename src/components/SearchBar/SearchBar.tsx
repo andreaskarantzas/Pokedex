@@ -3,22 +3,24 @@
  */
 
 import React, { useCallback, useEffect, useRef } from "react";
-import { StyledComponentProps, makeStyles } from "@material-ui/core/styles";
+import { StyledComponentProps } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import ThemeConfig from "../../Theme";
 import { Autocomplete } from "@material-ui/lab";
+import { Display } from "../Display/Display";
+import { SearchError } from "../Labels/SearchError";
+import { Grid } from "@material-ui/core";
 
 export interface SearchBarProps extends StyledComponentProps {
   onValueChange?: (text: string) => void;
-  value?: string;
+  query?: string;
   label?: string;
   autocompleteData?: Array<any>;
   autocompleteIdentifier?: string;
+  error?: boolean;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
-  const { onValueChange, label, autocompleteIdentifier } = props;
-  const classes = styles();
+  const { onValueChange, label, autocompleteIdentifier, error, query } = props;
   const debounce = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
@@ -49,41 +51,33 @@ export const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
   );
 
   return (
-    <Autocomplete
-      id="autocomplete-box"
-      freeSolo
-      options={props.autocompleteData || []}
-      getOptionLabel={(option) =>
-        props.autocompleteIdentifier
-          ? option[props.autocompleteIdentifier]
-          : undefined
-      }
-      onChange={handleAutocompleteChange}
-      className={classes.autocomplete}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          id="searchBar"
-          label={label || "Search"}
-          variant="outlined"
-          margin="normal"
-          className={classes.textField}
-          onChange={handleQueryChange}
-        />
-      )}
-    />
+    <Grid container direction="column">
+      <Autocomplete
+        id="autocomplete-box"
+        freeSolo
+        fullWidth={true}
+        options={props.autocompleteData || []}
+        getOptionLabel={(option) =>
+          props.autocompleteIdentifier
+            ? option[props.autocompleteIdentifier]
+            : undefined
+        }
+        onChange={handleAutocompleteChange}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            id="searchBar"
+            label={label || "Search"}
+            variant="outlined"
+            margin="normal"
+            onChange={handleQueryChange}
+            fullWidth={true}
+          />
+        )}
+      />
+      <Display enable={error}>
+        <SearchError query={query} />
+      </Display>
+    </Grid>
   );
 };
-
-const styles = makeStyles((theme) => ({
-  autocomplete: {
-    width: "80%",
-  },
-  textField: {
-    width: "50%",
-  },
-  searchIcon: {
-    marginTop: 4,
-    color: ThemeConfig.Colors.warmestGrey,
-  },
-}));
