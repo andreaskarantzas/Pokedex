@@ -1,8 +1,12 @@
 /**
  * Created by andreaskarantzas on 29.12.20.
  */
-import React from "react";
-import { StyledComponentProps, makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import {
+  StyledComponentProps,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Pokemon } from "../../types/Pokemon";
@@ -18,12 +22,14 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
   pokemon,
 }: PokemonListItemProps) => {
   const classes = useStyles();
+  const [hasError, setError] = useState(false);
   const history = useHistory();
 
   const handlePress = () => {
     history.push(`/pokemon/${pokemon.id}`);
   };
 
+  /** grab the correct color from a static list **/
   const backgroundColor = React.useMemo(() => {
     if (pokemon.types.length > 0) {
       const name = pokemon.types[0].type.name;
@@ -35,10 +41,21 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
     return ThemeConfig.Colors.warmGrey;
   }, [pokemon]);
 
+  /** instead of the default sprites, we fetch an nicer version
+   * from the available pokeres api, unless error is set to true **/
   const imageResource = React.useMemo(
-    () => `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
-    [pokemon]
+    () =>
+      hasError
+        ? pokemon.sprites.front_default
+        : `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
+    [hasError, pokemon]
   );
+
+  /** if pokeres api does not have the preferred resource,
+   * set the error flag to return the default sprite **/
+  const handleOnError = () => {
+    setError(true);
+  };
 
   return (
     <Box
@@ -63,10 +80,11 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
           )}`}</Typography>
         </Grid>
         <Grid container direction="column" alignContent="flex-end" spacing={4}>
-          <Grid item>
+          <Grid item className={classes.imageContainer}>
             <img
               src={imageResource}
               alt="pokemon front"
+              onError={handleOnError}
               className={classes.image}
             />
           </Grid>
@@ -81,23 +99,23 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   boxContainer: {
     padding: 0,
     borderRadius: 16,
   },
   container: {
-    padding: 16,
-    borderRadius: 16,
+    padding: theme.spacing(2),
+    borderRadius: theme.spacing(2),
     position: "relative",
   },
   identifierContainer: {
-    padding: 16,
+    padding: theme.spacing(2),
   },
   identifier: {
     position: "absolute",
     bottom: 0,
-    left: 16,
+    left: theme.spacing(2),
     color: ThemeConfig.Colors.white20,
     fontWeight: "bold",
     fontStyle: "italic",
@@ -105,11 +123,13 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     color: ThemeConfig.Colors.white,
-    // fontWeight: "normal",
     fontStyle: "italic",
+  },
+  imageContainer: {
+    height: 296,
   },
   image: {
     padding: "24px 0px",
-    width: 256,
+    width: 244,
   },
 }));

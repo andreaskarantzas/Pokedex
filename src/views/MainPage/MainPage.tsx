@@ -10,18 +10,17 @@ import {
   fetchPokemonsByIdOrName,
 } from "../../features/pokemonsList/pokemonListSlice";
 import { RootState } from "../../app/rootReducer";
-import { Pokemon } from "../../types/Pokemon";
 import { makeStyles } from "@material-ui/core/styles";
-import { PokemonListItem } from "../../components/PokemonListItem/PokemonListItem";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { PageTitleNavigation } from "../../components/Navigation/PageTitleNavigation";
 import { Display } from "../../components/Display/Display";
+import { MainPageContent } from "./MainPageContent";
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [query, setQuery] = useState<string>("");
-  const { data, offset, loading } = useSelector(
+  const { data, offset, loading, error } = useSelector(
     (state: RootState) => state.pokemon
   );
   const { autocompleteData } = useSelector(
@@ -49,8 +48,8 @@ export const MainPage: React.FC = () => {
   }, [dispatch]);
 
   const showError = React.useCallback(() => {
-    return query !== "" && data.length === 0 && !loading;
-  }, [data, query, loading]);
+    return query !== "" && !!error && !loading;
+  }, [error, query, loading]);
 
   return (
     <Grid container justify="center" alignContent="center">
@@ -64,18 +63,7 @@ export const MainPage: React.FC = () => {
           autocompleteIdentifier="name"
           error={showError()}
         />
-        <Grid
-          container
-          direction="row"
-          spacing={6}
-          className={classes.listContainer}
-        >
-          {data.map((p: Pokemon) => (
-            <Grid key={p.id} item xs={12} sm={6} md={4}>
-              <PokemonListItem pokemon={p} />
-            </Grid>
-          ))}
-        </Grid>
+        <MainPageContent data={data} loading={loading} />
         <Display enable={offset > 0 && !loading}>
           <Grid container justify="center" alignContent="center">
             <Button
@@ -94,11 +82,7 @@ export const MainPage: React.FC = () => {
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    padding: 16,
-  },
-  listContainer: {
-    padding: "16px 0px 32px 0px",
-    flexGrow: 1,
+    padding: theme.spacing(2),
   },
   text: {
     fontWeight: 900,

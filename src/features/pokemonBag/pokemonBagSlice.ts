@@ -8,6 +8,7 @@ import { PokemonDataType } from "../../types/PokemonDataType";
 
 type BagListState = {} & Pick<PokemonDataType, "data">;
 
+/** load previously locally saved state of the bag **/
 const cachedBagData = AppStore.get("MyPokemonBag")
   ? JSON.parse(AppStore.get("MyPokemonBag")!)
   : [];
@@ -23,7 +24,7 @@ const pokemonBagSlice = createSlice({
     addPokemonToBag(state, action: PayloadAction<{ pokemon: Pokemon }>) {
       const { pokemon } = action.payload;
       const pokemonExistsInBag = state.data.find(
-        (p: Pokemon) => p && p.id === pokemon.id
+        (p?: Pokemon) => p && p.id === pokemon.id
       );
       if (!pokemonExistsInBag) {
         state.data.push(pokemon);
@@ -33,7 +34,7 @@ const pokemonBagSlice = createSlice({
     removePokemonFromBag(state, action: PayloadAction<{ pokemon: Pokemon }>) {
       const { pokemon } = action.payload;
       const pokemonBagIndex = state.data.findIndex(
-        (p: Pokemon) => p && p.id === pokemon.id
+        (p?: Pokemon) => p && p.id === pokemon.id
       );
       if (pokemonBagIndex !== -1) {
         state.data.splice(pokemonBagIndex, 1);

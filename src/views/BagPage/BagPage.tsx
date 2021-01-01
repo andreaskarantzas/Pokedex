@@ -3,13 +3,14 @@
  */
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { Grid, Theme } from "@material-ui/core";
+import { Grid, Theme, Typography } from "@material-ui/core";
 import { Pokemon } from "../../types/Pokemon";
 import { makeStyles } from "@material-ui/core/styles";
 import { PokemonListItem } from "../../components/PokemonListItem/PokemonListItem";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import AppStore from "../../Util/AppStore";
 import { PageTitleNavigation } from "../../components/Navigation/PageTitleNavigation";
+import ThemeConfig from "../../Theme";
 
 export const BagPage: React.FC = () => {
   const classes = useStyles();
@@ -32,10 +33,10 @@ export const BagPage: React.FC = () => {
   }, []);
 
   const filteredData = React.useCallback((): Array<Pokemon> => {
-    return bagData.filter((p: Pokemon) =>
-      String(p.name || p.id)
-        .toLowerCase()
-        .includes(query.toLowerCase())
+    return bagData.filter(
+      (p: Pokemon) =>
+        p.name.toLowerCase().includes(query.toLowerCase()) ||
+        String(p.id).includes(query)
     );
   }, [bagData, query]);
 
@@ -54,6 +55,12 @@ export const BagPage: React.FC = () => {
             label="Search in your bag"
             error={showError()}
           />
+          {bagData.length === 0 ? (
+            <Typography
+              id="empty_bag_text"
+              className={classes.label}
+            >{`You have no Pokémons in your bag. Select on from the homepage and press "Add to my bag"`}</Typography>
+          ) : null}
         </Grid>
         <Grid
           container
@@ -79,5 +86,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   listContainer: {
     paddingTop: theme.spacing(2),
     flexGrow: 1,
+  },
+  label: {
+    color: ThemeConfig.Colors.charcoalGrey,
+    fontWeight: "bold",
   },
 }));

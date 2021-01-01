@@ -9,6 +9,7 @@ export type DisplayProps = {
   testID?: string;
 };
 
+/** conditionally renders a view **/
 export const Display: React.FC<DisplayProps> = ({ children, enable }) => {
   if (enable) {
     return <div>{children}</div>;

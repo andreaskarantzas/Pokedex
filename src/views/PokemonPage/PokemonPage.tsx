@@ -17,6 +17,7 @@ import { PageTitleNavigation } from "../../components/Navigation/PageTitleNaviga
 import { Capitalize } from "../../Util/Capitalize";
 import { PokemonSpecies } from "../../types/PokemonSpecies";
 import { fetchPokemonSpeciesById } from "../../features/pokemonSpecies/pokemonSpeciesSlice";
+import { PokemonPageSkeleton } from "./PokemonPageSkeleton";
 
 export const PokemonPage: React.FC = () => {
   const classes = useStyles();
@@ -27,7 +28,7 @@ export const PokemonPage: React.FC = () => {
     (state: RootState) => state.pokemonSpecies
   );
   const selectedPokemon = data.find(
-    (p: Pokemon) => p && p.id === Number(match.params.id)
+    (p?: Pokemon) => p && p.id === Number(match.params.id)
   );
   const selectedPokemonSpecies = speciesData.find(
     (ps: PokemonSpecies) => ps && ps.id === Number(match.params.id)
@@ -50,29 +51,34 @@ export const PokemonPage: React.FC = () => {
     }
   };
 
-  if (selectedPokemon && selectedPokemonSpecies) {
-    return (
-      <Grid container justify="center" alignContent="center">
-        <Grid item xs={12} lg={8} className={classes.container}>
-          <PageTitleNavigation
-            title={Capitalize(selectedPokemon.name)}
-            canGoBack={true}
-          />
-          <Paper className={classes.paper}>
-            <Grid container direction="row" className={classes.innerContainer}>
-              <PokemonPageImage pokemon={selectedPokemon} />
-              <PokemonPageTabs
-                pokemon={selectedPokemon}
-                species={selectedPokemonSpecies}
-              />
-            </Grid>
-          </Paper>
+  return (
+    <Grid container justify="center" alignContent="center">
+      <Grid item xs={12} lg={8} className={classes.container}>
+        <PageTitleNavigation
+          title={Capitalize(selectedPokemon?.name)}
+          canGoBack={true}
+        />
+        <Paper className={classes.paper}>
+          <Grid container direction="row" className={classes.innerContainer}>
+            {selectedPokemon && selectedPokemonSpecies ? (
+              <>
+                <PokemonPageImage pokemon={selectedPokemon} />
+                <PokemonPageTabs
+                  pokemon={selectedPokemon}
+                  species={selectedPokemonSpecies}
+                />
+              </>
+            ) : (
+              <PokemonPageSkeleton />
+            )}
+          </Grid>
+        </Paper>
+        {selectedPokemon ? (
           <PokemonPageControls pokemon={selectedPokemon} />
-        </Grid>
+        ) : null}
       </Grid>
-    );
-  }
-  return null;
+    </Grid>
+  );
 };
 
 const useStyles = makeStyles((theme) => ({

@@ -21,7 +21,7 @@ export const PokemonPageTabsStats: React.FC<PokemonPageTabsStatsProps> = ({
 
   return (
     <Grid container className={classes.container}>
-      <Grid xs={12}>
+      <Grid item xs={12}>
         <Display enable={tabIndex === 1}>
           {pokemon.stats.map((s: PokemonStat) => (
             <PokemonPageTabsStatItem key={s.stat.name} stat={s} />
