@@ -1,7 +1,7 @@
 /**
  * Created by andreaskarantzas on 29.12.20.
  */
-import React from "react";
+import React, { useState } from "react";
 import {
   StyledComponentProps,
   makeStyles,
@@ -22,6 +22,7 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
   pokemon,
 }: PokemonListItemProps) => {
   const classes = useStyles();
+  const [hasError, setError] = useState(false);
   const history = useHistory();
 
   const handlePress = () => {
@@ -41,11 +42,20 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
   }, [pokemon]);
 
   /** instead of the default sprites, we fetch an nicer version
-   * from the available pokeres api **/
+   * from the available pokeres api, unless error is set to true **/
   const imageResource = React.useMemo(
-    () => `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
-    [pokemon]
+    () =>
+      hasError
+        ? pokemon.sprites.front_default
+        : `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
+    [hasError, pokemon]
   );
+
+  /** if pokeres api does not have the preferred resource,
+   * set the error flag to return the default sprite **/
+  const handleOnError = () => {
+    setError(true);
+  };
 
   return (
     <Box
@@ -74,6 +84,7 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
             <img
               src={imageResource}
               alt="pokemon front"
+              onError={handleOnError}
               className={classes.image}
             />
           </Grid>

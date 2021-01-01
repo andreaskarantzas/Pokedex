@@ -81,7 +81,10 @@ yarn test
 
 4. Runs the cypress testing suite
 
-
+```sh
+yarn yarn start
+```
+In a new terminal tab:
 ```sh
 yarn cypress:open
 ```
@@ -95,6 +98,7 @@ yarn cypress:open
 - [MaterialUI](https://material-ui.com/)
 - [Apisauce](https://github.com/infinitered/apisauce)
 - [Prettier](https://prettier.io/)
+- [Cypress](https://prettier.io/)
 
 ## Attribution
 

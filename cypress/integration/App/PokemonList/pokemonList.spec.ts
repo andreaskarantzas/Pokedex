@@ -1,6 +1,11 @@
 /**
  * Created by andreaskarantzas on 31.12.20
  */
+import {
+  navigate_to_my_bag,
+  type_in_search_box,
+} from "../../../helpers/helpers.spec";
+
 const pokemonNameThatDoesNotExist = "qwerty";
 
 context("PokemonList", () => {
@@ -19,12 +24,7 @@ context("PokemonList", () => {
   it("the error text should appear when param is pokemonNameThatDoesNotExist", function () {
     // wait for the data to be loaded
     cy.wait(3000);
-    // clear any text from the search bar
-    cy.get("#autocomplete-box").clear();
-    // enter name that does not exist and check
-    cy.get("#autocomplete-box")
-      .type(pokemonNameThatDoesNotExist)
-      .should("have.value", pokemonNameThatDoesNotExist);
+    type_in_search_box(pokemonNameThatDoesNotExist);
     // check if error message appeared
     cy.get("#search_error_text").should("be.visible");
     // check if error message appeared
@@ -34,12 +34,6 @@ context("PokemonList", () => {
   it("navigate successfully to bagPage", () => {
     // wait for the data to be loaded
     cy.wait(3000);
-    // bag fab button should be visible
-    cy.get("#fab_bag").should("be.visible");
-    // click fab button
-    cy.get("#fab_bag").click();
-    cy.wait(1000);
-    // check the current page is the bagPage
-    cy.location("pathname").should("include", "/my-bag");
+    navigate_to_my_bag();
   });
 });

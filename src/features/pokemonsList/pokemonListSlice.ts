@@ -49,7 +49,7 @@ const pokemonsListSlice = createSlice({
       state.loading = false;
       state.error = null;
       if (hasMore) {
-        state.offset += 9;
+        state.offset += 6;
       }
     },
     setPokemonsListFailure(state, action: PayloadAction<{ err: string }>) {
@@ -90,15 +90,15 @@ export const pokemonReducer = pokemonsListSlice.reducer;
 export const fetchPokemons = (): AppThunk => async (dispatch, getState) => {
   const { pokemon } = getState();
   try {
-    dispatch(preparePokemonsList({ numberOfEntries: 9 }));
+    dispatch(preparePokemonsList({ numberOfEntries: 6 }));
     const res: Pageable = await pokeApiGet("pokemon", {
-      limit: 9,
+      limit: 6,
       offset: pokemon.offset,
     });
     for await (const [index, { url }] of res.results.entries()) {
       const pokemonId = Number(url.split("/").slice(-2)[0]);
       const pokemon = await pokeApiGet(`pokemon/${pokemonId}`);
-      dispatch(getPokemonsReducer({ index, pokemon, numberOfEntries: 9 }));
+      dispatch(getPokemonsReducer({ index, pokemon, numberOfEntries: 6 }));
     }
     dispatch(setPokemonsListSuccess({ hasMore: !!res.next }));
   } catch (err) {
