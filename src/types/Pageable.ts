@@ -1,5 +1,6 @@
 /**
  * Created by andreaskarantzas on 29.12.20.
+ * https://pokeapi.co/docs/v2#resource-listspagination-section
  */
 import { NamedAPIResource } from "./NamedAPIResource";
 

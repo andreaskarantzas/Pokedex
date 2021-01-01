@@ -28,6 +28,7 @@ const autocompleteSlice = createSlice({
   name: "autocomplete",
   initialState,
   reducers: {
+    /** set up state between calls **/
     prepareAutocompleteData(state) {
       state.loading = true;
       state.error = null;
@@ -75,6 +76,7 @@ export const fetchPokemonsForAutocomplete = (): AppThunk => async (
 ) => {
   const { autocomplete } = getState();
   try {
+    /** fetch only if the local storage has no entries or is first call **/
     if (autocomplete.autocompleteData.length === 0) {
       dispatch(prepareAutocompleteData());
       const res: Pageable = await pokeApiGet("pokemon", {

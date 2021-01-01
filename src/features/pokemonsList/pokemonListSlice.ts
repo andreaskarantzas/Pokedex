@@ -25,6 +25,7 @@ const pokemonsListSlice = createSlice({
       state.data = [];
       state.offset = 0;
     },
+    /** set up state between calls **/
     preparePokemonsList(
       state,
       action: PayloadAction<{ numberOfEntries: number }>

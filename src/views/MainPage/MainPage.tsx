@@ -17,6 +17,7 @@ import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { PageTitleNavigation } from "../../components/Navigation/PageTitleNavigation";
 import { Display } from "../../components/Display/Display";
 import Skeleton from "@material-ui/lab/Skeleton";
+import ThemeConfig from "../../Theme";
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -112,8 +113,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontStyle: "italic",
   },
   skeletonCard: {
+    backgroundColor: ThemeConfig.Colors.lightGrey,
     borderRadius: 16,
     flexGrow: 1,
-    height: 296,
+    height: 320,
   },
 }));

@@ -21,6 +21,7 @@ const pokemonSpeciesSlice = createSlice({
   name: "pokemonSpecies",
   initialState,
   reducers: {
+    /** set up state between calls **/
     preparePokemonSpecies(state) {
       state.loading = true;
       state.error = null;

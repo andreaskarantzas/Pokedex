@@ -11,6 +11,7 @@ import ArrowBack from "@material-ui/icons/ArrowBack";
 
 export type NoMatchProps = {};
 
+/** page rendered as 404 - when no url matches **/
 export const NoMatch: React.FC<NoMatchProps> = (_: NoMatchProps) => {
   const classes = useStyles();
   const history = useHistory();

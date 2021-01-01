@@ -28,6 +28,7 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
     history.push(`/pokemon/${pokemon.id}`);
   };
 
+  /** grab the correct color from a static list **/
   const backgroundColor = React.useMemo(() => {
     if (pokemon.types.length > 0) {
       const name = pokemon.types[0].type.name;
@@ -39,6 +40,8 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
     return ThemeConfig.Colors.warmGrey;
   }, [pokemon]);
 
+  /** instead of the default sprites, we fetch an nicer version
+   * from the available pokeres api **/
   const imageResource = React.useMemo(
     () => `https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`,
     [pokemon]
@@ -67,7 +70,7 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
           )}`}</Typography>
         </Grid>
         <Grid container direction="column" alignContent="flex-end" spacing={4}>
-          <Grid item>
+          <Grid item className={classes.imageContainer}>
             <img
               src={imageResource}
               alt="pokemon front"
@@ -111,8 +114,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: ThemeConfig.Colors.white,
     fontStyle: "italic",
   },
+  imageContainer: {
+    height: 296,
+  },
   image: {
     padding: "24px 0px",
-    width: 256,
+    width: 244,
   },
 }));

@@ -29,6 +29,7 @@ export const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
     };
   }, []);
 
+  /** handle underlying textField changes **/
   const handleQueryChange = useCallback(
     ({ target: { value } }: any) => {
       debounce.current && clearTimeout(debounce.current);
@@ -39,6 +40,8 @@ export const SearchBar: React.FC<SearchBarProps> = (props: SearchBarProps) => {
     [onValueChange]
   );
 
+  /** handle submissions from the user when they select
+   * one of the provided options **/
   const handleAutocompleteChange = React.useCallback(
     (event: any, value: any) => {
       if (value && autocompleteIdentifier) {

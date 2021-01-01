@@ -1,5 +1,6 @@
 /**
  * Created by andreaskarantzas on 28.12.20.
+ * https://pokeapi.co/docs/v2#pokemonsprites
  */
 
 export type PokemonSprites = {

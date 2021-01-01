@@ -8,6 +8,7 @@ import { PokemonDataType } from "../../types/PokemonDataType";
 
 type BagListState = {} & Pick<PokemonDataType, "data">;
 
+/** load previously locally saved state of the bag **/
 const cachedBagData = AppStore.get("MyPokemonBag")
   ? JSON.parse(AppStore.get("MyPokemonBag")!)
   : [];
