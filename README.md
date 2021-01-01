@@ -82,7 +82,7 @@ yarn test
 4. Runs the cypress testing suite
 
 ```sh
-yarn yarn start
+yarn start
 ```
 In a new terminal tab:
 ```sh

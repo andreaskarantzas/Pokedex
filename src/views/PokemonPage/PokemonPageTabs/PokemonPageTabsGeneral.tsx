@@ -46,9 +46,11 @@ export const PokemonPageTabsGeneral: React.FC<PokemonPageTabsGeneralProps> = ({
             {descriptionText}
           </Typography>
         </Display>
-        <Typography className={classes.sectionTitle}>Physical</Typography>
-        <TableLabel label="Height" value={`${heightInMeters} m`} />
-        <TableLabel label="Weight" value={`${weightInKgs} kg`} />
+        <Grid item xs={12}>
+          <Typography className={classes.sectionTitle}>Physical</Typography>
+          <TableLabel label="Height" value={`${heightInMeters} m`} />
+          <TableLabel label="Weight" value={`${weightInKgs} kg`} />
+        </Grid>
         <Typography className={classes.sectionTitle}>Types</Typography>
         <Grid container direction="row" spacing={1}>
           {pokemon.types.map((t: PokemonType, index: number) => (

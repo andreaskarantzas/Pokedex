@@ -59,7 +59,7 @@ export const BagPage: React.FC = () => {
             <Typography
               id="empty_bag_text"
               className={classes.label}
-            >{`You have no Pokémons in your bag. Select on from the homepage and press "Add to my bag"`}</Typography>
+            >{`You have no Pokémons in your bag. Select one from the homepage and press "Add to my bag"`}</Typography>
           ) : null}
         </Grid>
         <Grid
