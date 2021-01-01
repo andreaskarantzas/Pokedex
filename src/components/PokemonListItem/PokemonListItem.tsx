@@ -2,7 +2,11 @@
  * Created by andreaskarantzas on 29.12.20.
  */
 import React from "react";
-import { StyledComponentProps, makeStyles } from "@material-ui/core/styles";
+import {
+  StyledComponentProps,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
 import { Box, Grid, Typography } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { Pokemon } from "../../types/Pokemon";
@@ -81,23 +85,23 @@ export const PokemonListItem: React.FC<PokemonListItemProps> = ({
   );
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   boxContainer: {
     padding: 0,
     borderRadius: 16,
   },
   container: {
-    padding: 16,
-    borderRadius: 16,
+    padding: theme.spacing(2),
+    borderRadius: theme.spacing(2),
     position: "relative",
   },
   identifierContainer: {
-    padding: 16,
+    padding: theme.spacing(2),
   },
   identifier: {
     position: "absolute",
     bottom: 0,
-    left: 16,
+    left: theme.spacing(2),
     color: ThemeConfig.Colors.white20,
     fontWeight: "bold",
     fontStyle: "italic",
@@ -105,7 +109,6 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     color: ThemeConfig.Colors.white,
-    // fontWeight: "normal",
     fontStyle: "italic",
   },
   image: {

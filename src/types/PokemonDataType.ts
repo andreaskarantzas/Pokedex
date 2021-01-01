@@ -5,6 +5,6 @@ import { Pokemon } from "./Pokemon";
 import { RequestStatusType } from "./RequestStatusType";
 
 export type PokemonDataType = {
-  data: Pokemon[];
+  data: Array<Pokemon | undefined>;
   offset: number;
 } & RequestStatusType;

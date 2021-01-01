@@ -16,6 +16,7 @@ import { PokemonListItem } from "../../components/PokemonListItem/PokemonListIte
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { PageTitleNavigation } from "../../components/Navigation/PageTitleNavigation";
 import { Display } from "../../components/Display/Display";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 export const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -70,11 +71,17 @@ export const MainPage: React.FC = () => {
           spacing={6}
           className={classes.listContainer}
         >
-          {data.map((p: Pokemon) => (
-            <Grid key={p.id} item xs={12} sm={6} md={4}>
-              <PokemonListItem pokemon={p} />
-            </Grid>
-          ))}
+          {data.map((p: Pokemon | undefined, index: number) =>
+            p ? (
+              <Grid key={p.id} item xs={12} sm={6} md={4}>
+                <PokemonListItem pokemon={p} />
+              </Grid>
+            ) : (
+              <Grid key={`pending_${index}`} item xs={12} sm={6} md={4}>
+                <Skeleton variant="rect" className={classes.skeletonCard} />
+              </Grid>
+            )
+          )}
         </Grid>
         <Display enable={offset > 0 && !loading}>
           <Grid container justify="center" alignContent="center">
@@ -94,7 +101,7 @@ export const MainPage: React.FC = () => {
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
-    padding: 16,
+    padding: theme.spacing(2),
   },
   listContainer: {
     padding: "16px 0px 32px 0px",
@@ -103,5 +110,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   text: {
     fontWeight: 900,
     fontStyle: "italic",
+  },
+  skeletonCard: {
+    borderRadius: 16,
+    flexGrow: 1,
+    height: 296,
   },
 }));

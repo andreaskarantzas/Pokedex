@@ -32,10 +32,10 @@ export const BagPage: React.FC = () => {
   }, []);
 
   const filteredData = React.useCallback((): Array<Pokemon> => {
-    return bagData.filter((p: Pokemon) =>
-      String(p.name || p.id)
-        .toLowerCase()
-        .includes(query.toLowerCase())
+    return bagData.filter(
+      (p: Pokemon) =>
+        p.name.toLowerCase().includes(query.toLowerCase()) ||
+        String(p.id).includes(query)
     );
   }, [bagData, query]);
 

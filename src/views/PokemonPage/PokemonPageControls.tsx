@@ -24,7 +24,7 @@ export const PokemonPageControls: React.FC<PokemonPageControlsProps> = ({
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state.pokemonBag);
   const pokemonExistsInBag = data.find(
-    (p: Pokemon) => p && p.id === pokemon.id
+    (p?: Pokemon) => p && p.id === pokemon.id
   );
 
   const handleBagPress = useCallback(() => {

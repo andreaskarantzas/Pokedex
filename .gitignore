@@ -23,11 +23,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # webstorm related files
-.idea/modules.xml
-.idea/pokedex-felfel.iml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/inspectionProfiles/Project_Default.xml
+.idea/*
+
+# caches
 .eslintcache
 
 # Local Netlify folder
